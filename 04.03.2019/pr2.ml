@@ -29,6 +29,6 @@ let k = ((float_of_int y2)-.(float_of_int y1))/.((float_of_int x2)-.(float_of_in
 let b = (float_of_int y1) -. k*.(float_of_int x1) in 
 f 0 k b);;
 
-draw_ln (6,6) (18,26) '*';;
+draw_ln (6,6) (18,22) '*';;
 drw_ ();; 
 

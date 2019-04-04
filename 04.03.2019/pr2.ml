@@ -29,6 +29,16 @@ let k = ((float_of_int y2)-.(float_of_int y1))/.((float_of_int x2)-.(float_of_in
 let b = (float_of_int y1) -. k*.(float_of_int x1) in 
 f 0 k b);;
 
-draw_ln (6,6) (18,22) '*';;
-drw_ ();; 
+let draw_rect (x1,y1) w h ch =  (*w,h - высота, ширина; (x1,y1) - левый верхний угол*)
+	draw_ln (x1,y1) (x1+w,y1) ch;
+	draw_ln (x1+w,y1) (x1+w,y1+h) ch;
+	draw_ln (x1+w,y1+h) (x1,y1+h) ch;
+	draw_ln (x1,y1+h) (x1,y1) ch;;
+let n = read_int ();;
+draw_rect (0,0) (n-1) (n-1) '*';;
+drw_();;
+
+(*draw_ln (6,6) (18,22) '*';;
+drw_ ();;  *)
+
 

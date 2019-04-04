@@ -1,15 +1,17 @@
 open String;;
 open Array;;
 
-let max_height = 30;;
-let max_weight = 30;;
+let n = read_int ();;
 
-let m = init max_weight (fun _ -> init max_height (fun _ -> ' '));;
+let max_height = n+1;;
+let max_weight = n+1;;
+
+let m = init max_weight (fun _ -> init max_height (fun _ -> "  "));;
 
 let drw_ () =                                                 
 for y = 0 to (max_height-1) do 
 	(for x = 0 to (max_weight) do (
-	if x = (max_weight) then print_char '\n' else (print_char (m.(x)).(y)));	 
+	if x = (max_weight) then print_char '\n' else (print_string (m.(x)).(y)));	 
 	done);
 done;; 
 
@@ -34,8 +36,7 @@ let draw_rect (x1,y1) w h ch =  (*w,h - высота, ширина; (x1,y1) - левый верхний 
 	draw_ln (x1+w,y1) (x1+w,y1+h) ch;
 	draw_ln (x1+w,y1+h) (x1,y1+h) ch;
 	draw_ln (x1,y1+h) (x1,y1) ch;;
-let n = read_int ();;
-draw_rect (0,0) (n-1) (n-1) '*';;
+draw_rect (0,0) (n-1) (n-1) "+ ";;
 drw_();;
 
 (*draw_ln (6,6) (18,22) '*';;

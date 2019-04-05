@@ -41,6 +41,6 @@ draw_ln (x-n/3,y+2*n/3) (x-n/6,y+n-1) ch;
 draw_ln (x+n/3,y+2*n/3) (x+n/6,y+n-1) ch;
 draw_ln (x-n/2,y+n-1) (x+n/2,y+n-1) ch;;
 
-draw_gold (n/2,0) n "+ ";;
-drw_();;   
+draw_gold (n/2,0) n "+ ";; (* можно поставить другой символ *) 
+drw_();;                     
 

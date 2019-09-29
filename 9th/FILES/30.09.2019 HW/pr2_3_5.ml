@@ -54,7 +54,11 @@ let top_words ln ntop =
 
 	f Empty 0;;
 
-Printf.fprintf out_chan "%s" (List.fold_left (fun a (x,k) -> a^"(["^(List.fold_left (fun a x -> a^(string_of_int x)^";") "" x)^"],"^(string_of_int k)^"])\n") "" (top_words 3 50));;      
+let am = read_int();;
+
+let len = read_int();;
+
+Printf.fprintf out_chan "%s" (List.fold_left (fun a (x,k) -> a^"(["^(List.fold_left (fun a x -> a^(string_of_int x)^";") "" x)^"],"^(string_of_int k)^"])\n") "" (top_words len am));;      
 		                      
 
 

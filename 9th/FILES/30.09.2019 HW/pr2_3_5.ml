@@ -3,6 +3,11 @@ let out_chan = open_out "out";;
 
 type wordtree = N of (int list)*int*wordtree*wordtree|Empty;;
 
+let to_utf8 n =	if n < 128 then [n] else  
+	let rec f pow k = if ((1 lsl (8-pow)) > k) then [(((1 lsl pow) - 1) lsl (8 - pow)) lor k] else (0b10000000 lor (k mod 64))::(f (pow+1) (k lsr 6)) in
+List.rev (f 1 n);;
+
+
 let utf8_to_num l = 
 	let rec f li = 
 		match li with
@@ -58,8 +63,10 @@ let am = read_int();;
 
 let len = read_int();;
 
-Printf.fprintf out_chan "%s" (List.fold_left (fun a (x,k) -> a^"(["^(List.fold_left (fun a x -> a^(string_of_int x)^";") "" x)^"],"^(string_of_int k)^"])\n") "" (top_words len am));;      
-		                      
+(*Printf.fprintf out_chan "%s" (List.fold_left (fun a (x,k) -> a^"(["^(List.fold_left (fun a x -> a^(string_of_int x)^";") "" x)^"],"^(string_of_int k)^"])\n") "" (top_words len am));;      
+*)
+
+List.iter (fun (x,k) -> List.iter (fun x -> List.iter (fun x -> output_byte out_chan x) (to_utf8 x)) x; output_string out_chan (","^(string_of_int k)^"\n")) (top_words len am);;		                      
 
 
 (*print_int (utf8_to_num [0b01111111]);; *)

@@ -33,6 +33,6 @@ let rec _data () =
 	
 	if (newip land mask) = ip then if (List.exists (fun x -> x = newip) iplist) then print_string "Наш адрес" 
 										    else print_string "Левый адрес"
-				  else print_string "Внешний адрес" ;;
+				  else print_string "Внешний адрес";;
 
 _data();;

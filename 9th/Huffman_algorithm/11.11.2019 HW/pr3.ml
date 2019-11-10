@@ -18,7 +18,19 @@ let rec string_of_float_prefix pr =
 	|L c -> string_of_float c
 	|P (p1,p2) -> "!-("^(string_of_float_prefix p1)^","^(string_of_float_prefix p2)^")";;
 
-print_string (string_of_float_prefix (huff_algorithm [0.5;0.175;0.325]));;
+let average_code_length pr =
+	let rec f p l = 
+		match p with
+		|L x -> x*.l
+		|P (p1,p2) -> (f p1 (l+.1.)) +. (f p2 (l+.1.)) in 
+	f pr 0.;;  
 
+let pref = huff_algorithm [0.5;0.175;0.325];;
+
+print_string (string_of_float_prefix pref);;
+
+print_string "\n";;
+
+print_float (average_code_length pref);;
 
                                                                                                                                                        

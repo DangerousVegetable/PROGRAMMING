@@ -43,7 +43,7 @@ let (a,l) = deserialise l 3;;
 let (b,l) = deserialise l 4;;
 let (c,l) = deserialise l 4;;
 let (d,l) = deserialise l 5;;
-List.iter (fun x -> Printf.printf "%i; " x) (a::b::c::[d]);; 	
+List.iter (fun x -> Printf.printf "%i; " x) (a::b::c::[d]);;  	
 
 
 

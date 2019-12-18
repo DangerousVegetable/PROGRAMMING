@@ -29,6 +29,6 @@ let a = [|[|false;true;false;true;true|];
 	  [|false;false;false;false;false|];
 	|];;
 
-Array.iter (fun x -> Printf.printf "%i " x) (sort a);;
+Array.iter (fun x -> Printf.printf "%i " x) (sort a);;    
 
 		

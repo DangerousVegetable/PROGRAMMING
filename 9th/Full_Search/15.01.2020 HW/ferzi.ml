@@ -17,7 +17,25 @@ let check n =
 	with 
 	    Found l -> Some l;;
 
-match check (read_int()) with
+let rec f n s = 
+	if n = 0 then "" else s^(f (n-1) s);;
+
+let rec get_table l colm = 
+	match l with
+	|[] -> ""
+	|n::tl -> let s1 = f n "[ ]" and s2 = f (colm-n-1) "[ ]" in s1^"[$]"^s2^"\n"^(get_table tl colm);; 
+
+(*let draw_string s = 
+	let rec g n = 
+		if n >= String.length s then () else 
+				     match s.[n] with
+				     |'!' -> Sys.command "color 2"; print_char '!'; Sys.command "color 0"; g (n+1)
+				     |q -> print_char q; g (n+1) in
+	g 0;;*) 	
+
+let colnum = read_int();;
+
+match check colnum with
 	|None -> print_string "Impossible"
-	|Some l -> print_string "Example: "; List.iter (fun x -> Printf.printf "%i," x) l;;
+	|Some l -> print_string "Example: \n"; print_string (get_table l colnum);;
 							

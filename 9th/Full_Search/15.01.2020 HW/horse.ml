@@ -36,8 +36,22 @@ let solve n =
 	   main 0 0 0 [(0,0)]; None
 	with Found l -> Some l;;
 
-match solve (read_int()) with
+let get_table l colm maxl =
+	let m = Array.init colm (fun x -> Array.make colm 0)(*Array.make colm (Array.make colm 0)*) in
+	
+	let rec f li k = 
+		match li with
+	        |[] -> ()
+		|(x,y)::tl -> (m.(y)).(x)<-k; f tl (k+1) in
+	
+	f l 0;
+	 
+	Array.fold_left (fun str a -> (Array.fold_left (fun s x -> let xs = (string_of_int x) in s^" "^(String.make (maxl-(String.length xs)) ' ')^xs^" ") str a)^"\n") "" m;; 
+
+let colnum = read_int();;
+
+match solve colnum with
 	|None -> print_string "Impossible"
-	|Some l -> print_string "Example: "; List.iter (fun (x,y) -> Printf.printf "(%i,%i)->" x y) (List.rev l);;
+	|Some l -> print_string "Example: \n"; print_string (get_table (List.rev l) colnum (String.length (string_of_int(List.length l))) )(*List.iter (fun (x,y) -> Printf.printf "(%i,%i)->" x y) (List.rev l)*);;
 
 			   			

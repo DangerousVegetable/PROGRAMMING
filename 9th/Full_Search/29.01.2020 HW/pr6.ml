@@ -1,7 +1,9 @@
 open Array;;
         
 
-let count n p_l =	       
+let count n m_l =	       
+	let p_l = List.sort (compare) m_l in 
+
 	let ar = init (n+1) (fun i -> (make (List.length p_l) 0)) in
 	ar.(0).(List.length p_l - 1)<-1;
 	
@@ -18,5 +20,5 @@ let count n p_l =
 		if k = n then fold_left (+) 0 ar.(n) else (g k 0 p_l; f (k+1)) in
 	f 0;;
 
-print_int (count (read_int()) [2;3]);;
+print_int (count (read_int()) [3;2]);;
 	   

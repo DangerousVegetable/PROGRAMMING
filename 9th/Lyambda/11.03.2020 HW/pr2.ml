@@ -56,7 +56,7 @@ let print_rel lya =
 						  Array.iteri (fun i _ -> if i <= maxn && i>=n0 && m.(i) = " " then m.(i) <- "-") m;
 						  Array.iter (fun x -> print_string x) m; print_string "\n"; f tl in
 	 
-	f rel_list;;					     
+	f (List.rev rel_list);;					     
 		
 
 let lya = (Abs("y",Abs("xarr",Abs("t",App(Var "xarr",App(App(Var "t",Var "y"),Abs("xarr",App(Var "xarr",App(Var "t",Var "xarr")))))))));;

@@ -62,14 +62,3 @@ let print_rel lya =
 let lya = (Abs("y",Abs("xarr",Abs("t",App(Var "xarr",App(App(Var "t",Var "y"),Abs("xarr",App(Var "xarr",App(Var "t",Var "xarr")))))))));;
 
 print_rel lya;;
-
-(*let (l,_) = rel_list lya;; *)
-
-
-
-
-
-
-(*List.iter (fun (s,n,l) -> if l = [] then () else Printf.printf "((%s,%n) <- [%s]);" s n (List.fold_left (fun str n -> str^(string_of_int n)^";") "" l)) l;; *)
-                                                                                                                                                                
-

@@ -45,20 +45,21 @@ let print_rel lya =
 	Printf.printf "%s\n" s_lya;	
     
 	let m = Array.make len " " in 
-	List.iter (fun (_,n,l) -> m.(n) <- "^"; List.iter (fun n -> m.(n) <- "|") l) rel_list;                                                                                                   
+	List.iter (fun (_,n,l) -> if l <> [] then m.(n) <- "^"; List.iter (fun n -> m.(n) <- "|") l) rel_list;                                                                                                   
 	Array.iter (fun x -> print_string x) m; print_string "\n";
 
 	let rec f l = 
 		match l with
 		|[] -> ()
 		|(_,_,[])::tl -> f tl
-		|(_,n0,li)::tl -> let maxn = (List.hd (List.rev li)) in let m = Array.make len " " in List.iter (fun (_,n,li) -> if n >= n0 && n <= maxn then m.(n) <- "+" else m.(n)<-"|"; List.iter (fun n -> if n >= n0 && n <= maxn then m.(n) <- "+" else m.(n)<-"|";) li) l; 
+		|(_,n0,li)::tl -> let maxn = (List.hd (List.rev li)) in let m = Array.make len " " in List.iter (fun (_,n,li) -> if li <> [] then (if n >= n0 && n <= maxn then m.(n) <- "+" else m.(n)<-"|"; List.iter (fun n -> if n >= n0 && n <= maxn then m.(n) <- "+" else m.(n)<-"|";) li)) l; 
 						  Array.iteri (fun i _ -> if i <= maxn && i>=n0 && m.(i) = " " then m.(i) <- "-") m;
 						  Array.iter (fun x -> print_string x) m; print_string "\n"; f tl in
 	 
 	f (List.rev rel_list);;					     
 		
 
-let lya = (Abs("y",Abs("xarr",Abs("t",App(Var "xarr",App(App(Var "t",Var "y"),Abs("xarr",App(Var "xarr",App(Var "t",Var "xarr")))))))));;
+let lya = (Abs("y",Abs("xarr",Abs("t",App(Var "xarr",App(App(Var "t",Var "y"),Abs("xarr",App(Var "x",App(Var "y",Var "xarr")))))))));;  
+(*let lya  = Abs("x",App(Var "x", Abs("x",Var "x")));; *)
 
 print_rel lya;;

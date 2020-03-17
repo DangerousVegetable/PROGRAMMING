@@ -1,0 +1,1 @@
+let print_church n = print_int (n ((+)1) 0);;

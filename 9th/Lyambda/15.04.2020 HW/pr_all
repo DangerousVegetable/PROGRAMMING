@@ -1,0 +1,24 @@
+Y = \f.(\x.f (x x)) (\x.f (x x));
+
+(-1) a = pi_l (a (\p.<(pi_r p),((+) (pi_r p) 1)>) <0,0>);
+(-) a b = b (-1) a;
+div = \f.\a.\b.(IF (a>b) ((+1)(f ((-) a b) b)) 0);
+(/) a b = (Y div) a b;
+(%) a b = (-) a ((*) b ((/) a b));
+
+
+is_p = \f.\a.\b.(IF (b > 1) (IF (((%) a b) > 0) (f a ((-1) b)) F) T);
+IS_P = \a.(IF (a > 1) ((Y is_p) a ((-1) a)) F);
+
+[0;1;3;1;10;2;4;5] = InR <0,InR <1,InR <3,InR <1,InR <10,InR <2,InR <2,InR <4,InR <5,InL 0>>>>>>>>>;
+
+len_list = \f.\l.( (Case l (\f.F) (\f.T)) ((+1) f (Case l _ F)) 0);
+						  	  ^не важно что (никогда не будет применено), может стоять что - угодно
+length_list l = (Y len_list) l;
+
+sum_l = \f.\l.( (Case l (\f.F) (\f.T)) ((+) (Case l _ T) (f (Case l _ F))) 0);
+
+sum_list l = (Y sum_l) l;
+
+map = \f.\g.\l.( (Case l (\f.F) (\f.T)) (InR <g (Case l _ T),f g (Case l _ F)>)  (InL 0));
+MAP l = (Y map) l;

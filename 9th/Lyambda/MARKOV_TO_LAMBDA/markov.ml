@@ -100,8 +100,8 @@ let rule_to_l rl =
 	                                                                                                         
 (*List.iter (fun x -> print_string ((l_to_string x)^" ;")) (l_to_list (parse_l (rule_to_l [U ("!","\"");T ("\"","!")])));;*)
 
-let rl = rule_to_l [U ("a","b");T ("b","c")];;
-let str = string_to_l "ba";;
+let rl = rule_to_l [U ("a","b");T ("b","c")];;    (*правила U - нетерминальные, T - терминальные*)
+let str = string_to_l "ba";;     (*строка*)
 
 let markov = "("^y^" "^algorythm^" "^str^" "^rl^")";;
 
@@ -119,7 +119,7 @@ print_string (ll_to_string (beta_reduction (parse_l test_step)));; *)
 
 let out = open_out "OUT";;
 
-Printf.fprintf out "%s" (l_to_string (parse_l markov));;
+Printf.fprintf out "%s" (l_to_string (parse_l markov));;    (*ƒЋя  ќћѕ»Ћя÷»» - ocamlc parse_lambda.ml beta_reduction.ml markov.ml -o markov.exe*)
 
 
 

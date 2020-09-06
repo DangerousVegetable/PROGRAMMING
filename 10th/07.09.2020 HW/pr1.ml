@@ -33,6 +33,6 @@ let rec findmostcommon l =
 	|[] -> failwith "Empty input"
 	|_ -> hd (qsort (fun (a,n) (b,m) -> if n = m then a <$ b else n > m) (flatten (f (map (fun x -> [(x,1)]) l))));;
 
-let (s,n) = findmostcommon ["abab";"b";"cafaf";"abab";"fl";"cafaf";"cafaf";"b"];; 
+let (s,n) = findmostcommon ["abab";"b";"cafaf";"abab";"fl";"cafaf";"cafaf";"b"];;    
 Printf.printf "%n: %s" n s;; 
 	

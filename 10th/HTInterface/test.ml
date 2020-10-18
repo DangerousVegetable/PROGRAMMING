@@ -1,4 +1,4 @@
-open Hashtable1;;
+open Hashtable2;;
 
 let hf s n =
 	let rec f m = 
@@ -16,7 +16,7 @@ Printf.printf "%d\n" v;;
 add tb "c" 50;;
 let Some v = delete tb "c";;
 Printf.printf "%d\n" v;;
-add tb "b" 3;;
+add tb "b" 4;;
 iter tb (fun (a,b) -> Printf.printf "(%s,%d)" a b);;
 print_string "\n";;
 Printf.printf "%d\n" (fold tb (fun s (_,b) -> s+b) 0);;  

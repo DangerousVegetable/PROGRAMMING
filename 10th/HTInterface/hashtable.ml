@@ -3,7 +3,11 @@ type ('a,'b) t = {
 	mutable data: ('a*'b) list array;	
 };;
 
-let create n hashf = {hashfunc = hashf; data = Array.make n []};; 
+let create n hashf = 
+	let rec min_degree m = 
+		if 1 lsl m > n then 1 lsl m else min_degree (m+1) in
+
+	{hashfunc = hashf; data = Array.make (min_degree 0) []};; 
 let add table a b =
 	let hash = table.hashfunc a (Array.length table.data) in
 	let l = table.data.(hash) in 

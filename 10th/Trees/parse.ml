@@ -7,7 +7,8 @@ let tree_of_string s =
 			|'(' -> let (tl1,n) = parse (n+1) in if s.[n] = ')' then let (tl2,n) = parse (n+1) in ((Tree tl1)::tl2,n) else failwith ((string_of_int n) ^ " - unexpected \')\'")
 			|')' -> ([],n)
 			|_ -> failwith "Unknown symbol" in
-	let (s,_) = parse 0 in s;;
+	let (t,n) = parse 0 in 
+	if n = String.length s then t else failwith ("Incorrect tree: "^(string_of_int n));;
 
 let rec string_of_tree tl = 
 	match tl with
@@ -16,4 +17,4 @@ let rec string_of_tree tl =
 
 let s = read_line();;
 
-print_string (string_of_tree (tree_of_string s));; 
+print_string (string_of_tree (tree_of_string s));;

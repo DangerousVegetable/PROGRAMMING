@@ -10,7 +10,7 @@ done;;
 
 let rec give_number m num = 
 	match b.(m) with
-	|Some _ -> num
+	|Some x -> max (x+1) num
 	|None -> let newnum = List.fold_left (fun num m -> give_number m num) num a.(m) in b.(m) <- Some newnum; newnum+1;;
 
 for i = 0 to (n-1) do	

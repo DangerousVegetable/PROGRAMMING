@@ -17,6 +17,12 @@ let rec string_of_tree tr =
 	|Leaf -> ""
 	|Node (n,l,r) -> "("^(string_of_int n)^","^(string_of_tree l)^","^(string_of_tree r)^")";;
 
+let min = read_int();;
+let max = read_int();;
 
-let Some t = build [1;2;5];;
-print_string (string_of_tree t);;
+if min = max then 
+	let Some t = build [min] in
+	print_string (string_of_tree t)
+else
+	let Some t = build [min;max] in
+	print_string (string_of_tree t);;

@@ -27,6 +27,18 @@ let rec delete tr a =
 						|Some (k,v) -> Node((k,v),delete l k,r) 
 				else if a < n then Node((n,m),f l,r) else Node((n,m),l,f r) in
 	f tr;; 
+
+let verify tr =
+	let get_val op = 
+		match op with
+		|None -> failwith ""
+		|Some v -> v in
+
+	let rec f t min max = 
+		match t with
+		|Leaf -> true
+		|Node((k,v),tl,tr) -> if (min = None || (get_val min) < k)&&(max = None || k < (get_val max)) then (f tl min (Some k))&&(f tr (Some k) max) else false in
+	f tr None None;;
 									
 
 let rec string_of_tree tr = 
@@ -39,4 +51,7 @@ let t = Node((5,5),Node((3,3),Node((2,2),Leaf,Leaf),Node((4,4),Leaf,Leaf)),Node(
 (*Printf.printf "%b" (mem (Node(4,Node(3,Leaf,Leaf),Node(5,Leaf,Leaf))) 6);;
 *)
 
-print_string (string_of_tree (delete t 5));;
+print_string (string_of_tree (delete t 5));;  
+(*let t = Node((5,5),Node((3,3),Node((2,2),Leaf,Leaf),Node((6,6),Leaf,Leaf)),Node((8,8),Node((7,7),Leaf,Leaf),Leaf));;
+
+Printf.printf "%b" (verify t)*);;

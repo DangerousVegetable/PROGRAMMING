@@ -74,7 +74,7 @@ bool intersect(point p1, point p2, point p3, point p4)
 {
     if(insegment(p1,p2,p3) || insegment(p1,p2,p4) || insegment(p3,p4,p1) || insegment(p3,p4,p2))
     {
-        std::cout << "here";
+        //std::cout << "here";
         return true;
     }
     else

@@ -1,26 +1,26 @@
 #include <iostream>
-#include <vector>
+#include <string>
+
 using namespace std;
 
 int main()
 {
     int n;
     cin >> n;
-    vector<long long> v(n);
+
     for(int i = 0; i < n; i++)
     {
-        cin >> v[i];
+        int t;
+        string a, b;
+        cin >> t >> a >> b;
+
+        int ind = 0;
+        while(ind < a.size() && ind < b.size() && a[ind] == b[ind]) ind++;
+
+        int ans = a.size() - ind + b.size() - ind;
+
+        if(t < ans) cout << "No\n";
+        else if ((t-ans)%2 == 0) cout << "Yes\n";
+        else cout << "No\n";
     }
-    long long total = 0;
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = i+1; j < n; j++)
-        {
-            for(int k = j+1; k < n; k++)
-            {
-                if((v[i]^v[j]) < (v[j]^v[k])) total++;
-            }
-        }
-    }
-    cout << total;
 }

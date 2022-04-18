@@ -60,7 +60,7 @@ def naiveFilosofLife(num):
         take_fork(num,left,True)
         time.sleep(0.1)
         take_fork(num,right,True)
-        time.sleep(0.2)
+        time.sleep(1)
         stats[num] += 1
         #print("Filosof %d: eating" % num)
         take_fork(num,left,False)

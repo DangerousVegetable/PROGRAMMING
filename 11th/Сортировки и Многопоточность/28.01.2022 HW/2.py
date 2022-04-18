@@ -2,58 +2,41 @@ import multiprocessing as mp
 import math
 import time
 
+last = 1
+
 def check(p):
     for i in range(2, int(math.sqrt(p))+1):
         if p%i == 0:
             return False
     return p > 1
 
-def generate(lock, pl, update, last):
+def generate(conn):
+    global last
     while True:
         last = last+1
         if check(last):
-            lock.acquire()
-            try:
-                pl.append(last)
-                update = True
-            finally:
-                lock.release()
-                return 
+            conn.send(last)
 
-def consume(lock, pl, update):
-    if update:
-        lock.acquire()
-        try:
-            for t in pl:
-                print("New prime found! -", t)
-                update = False
-            pl = []
-        finally:
-            lock.release()
+def consume(conn):
+    print("New prime found! -", conn.recv())
 
-def thg(lock, pl, update, last):
+def thg(conn):
     while True:
-        generate(lock, pl, update, last)
+        generate(conn)
         #sprint(update, pl, last)
         #it's permitted to uncomment this: 
         time.sleep(0.1)
 
-def thc(lock, pl, update):
+def thc(conn):
     while True:
-        consume(lock, pl, update)
-        print(lock, pl, update)
+        consume(conn)
 
 if __name__ == '__main__':
     #mp.set_start_method('spawn')
 
-    lock = mp.Lock()
-    pl = []
-    update = False
-    last = 1
-
-    #parent_conn, child_conn = mp.Pipe()
-    th1 = mp.Process(target=thg, args=(lock,pl,update, last))
-    th2 = mp.Process(target=thc, args=(lock,pl,update))
+    parent_conn, child_conn = mp.Pipe()
+    th1 = mp.Process(target=thg, args=(child_conn, ))
+    th2 = mp.Process(target=thc, args=(parent_conn, ))
 
     th1.start()
     th2.start()

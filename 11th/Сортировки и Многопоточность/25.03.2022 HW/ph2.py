@@ -58,11 +58,15 @@ def naiveFilosofLife(num):
         left,right = right, left
     while True:
         take_fork(num,left,True)
+        time.sleep(0.1)
         take_fork(num,right,True)
+        time.sleep(0.2)
         stats[num] += 1
         #print("Filosof %d: eating" % num)
         take_fork(num,left,False)
+        time.sleep(0.1)
         take_fork(num,right,False)
+        time.sleep(0.1)
         #print("Filosof %d: thinking about philosopy" % num)
 
 '''

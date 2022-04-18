@@ -8,6 +8,31 @@ struct sortnet
 {
 	int size;
 	vector<pair<int,int>> net;
+
+    static vector<pair<int,int>> zigzag(int n) //net having MAX = 1
+    {
+        vector<pair<int,int>> net;
+        int l = 0;
+        int r = n-1;
+        while(l < r)
+        {
+            for(int i = l; i < r; i++)
+            {
+                net.push_back({i,i+1});
+            }
+
+            for(int i = r-2; i >= l; i--)
+            {
+                net.push_back({i,i+1});
+            }
+
+            l++;
+            r--;
+        }
+
+        return net;
+    }
+
 	sortnet(int n)
 	{
 		this->size = n;
@@ -83,12 +108,13 @@ struct sortnet
 				x/=2;
 			}
 			
+            #if 0
 			for(int i = 0; i < size; i++)
 			{
 				cout << test[i];
 			}
 			cout << ": ";
-			
+			#endif
 			for(auto p: net)
 			{
 				int i = p.first;
@@ -107,7 +133,7 @@ struct sortnet
 				}
 			}
 			
-			printf("%d\n", ok);
+			//printf("%d\n", ok);
 		}
 		return b;
 	}
@@ -144,16 +170,16 @@ struct sortnet
 int main()
 {
 	
-	vector<int> a = {4,5,1,3,5,7,13,3,0,7};
+	vector<int> a = {4,5,1,3,5,7,13,3,0,7,2};
 	int n = a.size();
-	sortnet sn(n);
+	sortnet sn(n, sortnet::zigzag(n));
 	
 	sn.draw();
 
+	cout << "Valid: " << (sn.check() ? "+" : "-") << "\n";
 
     printf("The MAX is: %d\n", sn.calcmax());
 	//you can uncomment this line:
-	//cout << sn.check() << "\n";
 	
 	a = sn.sort(a);
 	for(auto k : a)
